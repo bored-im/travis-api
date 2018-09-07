@@ -13,6 +13,8 @@ else
   listen "#{Integer(ENV.fetch('PORT'))}", backlog: 1024
 end
 
+logger Logger.new($stdout)
+
 require 'fileutils'
 before_fork do |server, worker|
   # preload travis so we can have copy on write
