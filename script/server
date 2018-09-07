@@ -24,10 +24,4 @@ fi
 cmd="unicorn config.ru -E $RACK_ENV -c config/unicorn.rb"
 [[ $RACK_ENV == "development" ]] && cmd="rerun -b -- $cmd"
 
-if [ -z "$DYNO" ]; then
-  cmd="bundle exec je $cmd"
-else
-  cmd="bin/start-nginx je $cmd"
-fi
-
-exec $cmd
+exec bundle exec $cmd
