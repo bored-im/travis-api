@@ -139,7 +139,7 @@ module Travis::Api
           use Travis::Api::App::Middleware::OpenCensus
         end
 
-        use Rack::SSL if Endpoint.production?
+        # use Rack::SSL if Endpoint.production?
         use ActiveRecord::ConnectionAdapters::ConnectionManagement
         use ActiveRecord::QueryCache
 
