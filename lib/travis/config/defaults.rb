@@ -18,12 +18,12 @@ module Travis
     end
 
     HOSTS = {
-      production:  'travis-ci.org',
+      production:  ENV['TRAVIS_INGRESS_HOST'] || 'travis-ci.org',
       staging:     'staging.travis-ci.org',
       development: 'localhost:3000'
     }
 
-    define  host:                 'travis-ci.org',
+    define  host:                 ENV['TRAVIS_INGRESS_HOST'] || 'travis-ci.org',
             shorten_host:         'trvs.io',
             public_mode:          !!ENV['PUBLIC_MODE'],
             applications:         {},
@@ -79,11 +79,11 @@ module Travis
     end
 
     def org?
-      host.ends_with?('travis-ci.org')
+      true
     end
 
     def com?
-      host.ends_with?('travis-ci.com')
+      false
     end
   end
 end
