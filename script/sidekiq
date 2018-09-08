@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+cd "$(dirname "$0")/.."
+
+. config/ruby_config.sh
+
+[ $RACK_ENV ]        || export RACK_ENV=development
+
+if [[ $RACK_ENV == "production" ]]; then
+  export tmp_dir=/tmp
+else
+  mkdir -p tmp
+  export tmp_dir=./tmp
+fi
+
+cp /config/travis.yml config/travis.yml
+exec bundle exec sidekiq
