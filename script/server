@@ -24,4 +24,5 @@ fi
 cmd="unicorn config.ru -E $RACK_ENV -c config/unicorn.rb"
 [[ $RACK_ENV == "development" ]] && cmd="rerun -b -- $cmd"
 
+cp /config/travis.yml config/travis.yml
 exec bundle exec $cmd
