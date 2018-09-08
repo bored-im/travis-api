@@ -8,6 +8,8 @@ class Travis::Api::App
       def call(env)
         app.call(env)
       rescue Exception => e
+        puts e
+        puts e.backtrace
         raise if Travis.testing
 
         body = "Sorry, we experienced an error.\n"
