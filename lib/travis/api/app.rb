@@ -56,7 +56,7 @@ module Travis::Api
     autoload :Responders,   'travis/api/app/responders'
     autoload :Cors,         'travis/api/app/cors'
 
-    Rack.autoload :SSL, 'rack/ssl'
+    # Rack.autoload :SSL, 'rack/ssl'
 
     ERROR_RESPONSE = JSON.generate(error: 'Travis encountered an error, sorry :(')
 
