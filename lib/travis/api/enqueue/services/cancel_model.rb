@@ -23,7 +23,9 @@ module Travis
         def push(event, payload)
           # target may have been retrieved with a :join query, so we need to reset the readonly status
           if can_cancel?
-            ::Sidekiq::Client.push(
+            ::Sidekiq::Client.new(
+              ::Sidekiq::RedisConnection.create(url: ENV["TRAVIS_HUB_REDIS_URL"])
+              ).push(
                   'queue'   => 'hub',
                   'class'   => 'Travis::Hub::Sidekiq::Worker',
                   #'args'    => ["#{type}:cancel", @params]

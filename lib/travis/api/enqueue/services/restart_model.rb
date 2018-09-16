@@ -14,7 +14,9 @@ module Travis
 
         def push(event, payload)
           if current_user && target && accept?
-            ::Sidekiq::Client.push(
+            ::Sidekiq::Client.new(
+              ::Sidekiq::RedisConnection.create(url: ENV["TRAVIS_HUB_REDIS_URL"])
+              ).push(
                   'queue'   => 'hub',
                   'class'   => 'Travis::Hub::Sidekiq::Worker',
                   'args'    => [event, payload]
